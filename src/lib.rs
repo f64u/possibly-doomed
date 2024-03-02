@@ -1,3 +1,5 @@
+#![feature(iter_intersperse)]
+
 use leptos::*;
 use leptos_meta::*;
 use leptos_router::*;
@@ -7,10 +9,14 @@ mod components;
 mod pages;
 mod paths;
 
-// Top-Level pages
 use crate::components::path::PathComponent;
-use crate::pages::not_found::NotFound;
 use crate::paths::PATHS;
+
+macro_rules! routes {
+    ($($route:expr),+) => {
+        vec![$(view! {<Route path={$route} view=|| view! {<PathComponent path={PATHS[$route].clone()} /> } />}),+]
+    };
+}
 
 /// An app router which renders the homepage and handles 404's
 #[component]
@@ -29,10 +35,17 @@ pub fn App() -> impl IntoView {
         <Meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
         <Router>
-            <Routes>
-                <Route path="/" view=|| view! { <PathComponent path=PATHS["/"].clone() />  } />
-                <Route path="/*" view=NotFound/>
-            </Routes>
+            {Routes(RoutesProps { base: None, children: Box::new(|| Fragment::new(routes!(
+                "/",
+                "/prince",
+                "/prince/leave",
+                "/prince/stay",
+                "/prince/stay/ask-for-dog",
+                "/prince/stay/no-dog",
+                "/prince/stay/ask-for-dog/pet-dog",
+
+                "/princess"
+            ))) })}
         </Router>
     }
 }

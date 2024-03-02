@@ -29,15 +29,48 @@ lazy_static! {
         path! {
             "/",
             "Not important",
-            "You are born as either a shelterd prince or princess.",
+            "You are to be born as either a shelterd prince or princess.",
             vec!["/prince", "/princess"]
         },
         path! {
             "/prince",
             "Be a prince",
-            "You are born to a King who needed you. You are doomed to three fates.",
+            "You are born to an Egyptian King after he had trouble conceiving a son. However, your fate was determined at birth by the seven Hathors so that you die either by snake, corcodile, or even dog. Hearing this, the King locks you up in a stone house in the desert and forbids your leaving. The days pass by. You have never seen the outside.",
+            vec!["/prince/stay", "/prince/leave"]
+        },
+        path! {
+            "/prince/stay",
+            "You stay locked up in the stone house.",
+            "You stay locked up in the stone house. One day, you see from afar a man walking with a creature. You ask your servant what it is that the man is walking this, and he answers that it is a dog.",
+            vec!["/prince/stay/ask-for-dog", "/prince/stay/no-dog"]
+        },
+        path! {
+            "/prince/leave",
+            "You ask your father to leave.",
+            "You ask your father to leave, but he refuses since you're too young.",
+            vec!["/prince/stay"]
+        }, // End of path
+        path! {
+            "/prince/stay/ask-for-dog",
+            "You ask the servant to bring you a dog.",
+            "You ask the servant to bring you a dog. Even though your fate mentioned a dog ending your life, you have been locked up in the stone house for too long and you feel lonely.",
+            vec!["/prince/stay/ask-for-dog/pet-dog"]
+        },
+        path! {
+            "/prince/stay/no-dog",
+            "You nod in fear.",
+            "Even though you have been locked up in the stone house for too long and have been feeling lonely, you're aware that a dog could end your life according to your fate. You stay away from dogs.\nHello",
             vec![]
         },
+        path! {
+            "/prince/stay/ask-for-dog/pet-dog",
+            "You pet the dog.",
+            "You pet the dog and raise it. He seems to like you.\nThe days pass by and you grow more wary of your way of life.",
+            vec![]
+        },
+
+
+
         path! {
             "/princess",
             "Be a princess",
